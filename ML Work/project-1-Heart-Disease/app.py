@@ -1,10 +1,14 @@
 import streamlit as st
 import pandas as pd
 import joblib
+from pathlib import Path
 
-model=joblib.load("logistic_heart_disease.pkl")
-scaler=joblib.load("heart_scaler.pkl")
-expected_cols=joblib.load("heart_columns.pkl")
+BASE_DIR = Path(__file__).resolve().parent
+
+# Load saved files
+model = joblib.load(BASE_DIR / "logistic_heart_disease.pkl")
+scaler = joblib.load(BASE_DIR / "heart_scaler.pkl")
+expected_cols = joblib.load(BASE_DIR / "heart_columns.pkl")
 
 st.title("Heart Stroke Prediction💓")
 st.markdown("Provide the following Details")
@@ -51,4 +55,7 @@ if st.button("Predict"):
     else:
         st.success("Low Risk of Heart Disease")
 
-    
+st.caption(
+    "For educational purposes only. "
+    "This prediction is not a medical diagnosis."
+)
